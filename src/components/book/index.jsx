@@ -59,6 +59,17 @@ const RightSide = React.forwardRef((props, ref) => {
     );
 });
 
+
+
+const Cover = React.forwardRef((props, ref) => {
+
+    return (
+        <div ref={ref} className="page cover">
+            <div className="logo"></div>
+        </div>
+    );
+});
+
 export function Book(props) {
 
   return (
@@ -69,7 +80,7 @@ export function Book(props) {
             maxShadowOpacity={0.4}
             showCover={true}
         >
-          <div className="page cover">Page 1</div>
+            <Cover />
           <LeftSide />
           <RightSide />
           <LeftSide />

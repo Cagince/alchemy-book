@@ -29,6 +29,16 @@
   height:100%;
 }
 
+.logo {
+  background-image: url("alchemy_logo.png");
+
+  background-size: cover;
+  box-shadow: none;
+  width: 150px;
+  height: 150px;
+  margin-left: 320px;
+  margin-top: 425px;
+}
 
 .book-wrapper {
   display: block;
@@ -75,6 +85,8 @@
 
 
 .cover {
+  margin: 0;
+  padding: 0;
   background-color: unset;
   background-image: url('cover.jpg');
   background-size: cover;
