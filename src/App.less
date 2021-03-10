@@ -1,0 +1,524 @@
+
+
+
+
+.App {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+
+  background: #111d27;
+  /* background: #e2e1e0; */
+
+  background-image: -webkit-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+  background-image: -moz-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+  background-image: -o-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+  background-image: radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+
+}
+
+
+.book-wrapper {
+  display: block;
+  width: 1600px;
+}
+
+
+.caps {
+  color: rgba(0,0,0,0.7);
+  float:left;
+  font-size: 7em;
+  line-height: 60px;
+  padding-right: 12px;
+  position:relative;
+  top:8px;
+}
+
+.page {
+
+  background-color: #f8f5de;
+  /* background-color: #f8f5de; */
+  background-image: url("https://www.transparenttextures.com/patterns/beige-paper.png");
+  /* box-shadow: inset 0 0 75px rgba(255,210,0,0.3), inset 0 0 20px rgba(255,210,0,0.4), inset 0 0 30px rgba(220,120,0,0.8); */
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  /* background-image: linear-gradient(to right, rgba(0,0,0,0.4), rgba(0, 0, 0, 0.1) 11%, rgba(0,0,0,0) 35%, rgba(0, 0, 0, 0.1) 65%); */
+  box-shadow: inset 0 0 75px rgba(22,10,0,0.3), inset 0 0 20px rgba(55,10,10,0.4), inset 0 0 30px rgba(70,70,20,0.8);
+
+  /* box-shadow: inset -7px 0 30px -7px rgba(0,0,0,0.4), inset -7px 0 30px rgba(0,0,0,0.4), inset 5px 0 30px rgba(0,0,0,0.4); */
+  color: rgba(0,0,0,0.8);
+  box-sizing: border-box;
+  padding: 1em 3em;
+  /* letter-spacing: 0.05em; */
+  /* line-height: 1.8; */
+  /* padding: 5em 10em 15em 5em; */
+
+  font-size: 37px;
+  font-weight: bold;
+  /* font-family: 'Mr De Haviland', cursive; */
+  font-family: 'Tangerine', cursive;
+}
+
+
+.cover {
+  background-color: unset;
+  background-image: url('cover.jpg');
+  background-size: cover;
+  box-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+/* 
+ * Circles
+ */
+.magic-circle {
+  display: block;
+  position: relative;
+  width: @circleradius;
+  height: @circleradius;
+  border: 1px solid @lightcolor;
+  border-radius: @circleradius * 0.5;
+  
+  &.lighter {
+    border: 1px solid @lightercolor;
+  }
+  
+  &.lightest {
+    border: 1px solid @lightestcolor;
+  }
+  
+  &.dotted {
+    border-style: dotted; 
+  }
+  
+  &.doubled {
+    &:after {
+      display: block; 
+      content: '';
+      width: 108%;
+      height: 108%;
+      border: 1px solid @lightcolor;
+      border-radius: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    &.dotted:after { 
+      border-style: dotted; 
+    }
+  }
+  
+  > .formula {
+    font-family: Quivira;
+    transform: translate(47%,0);
+    height: 100%;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: @lightcolor;
+    
+    span {
+      height: 50%;
+      position: absolute;
+      width: 1em;
+      padding-top: .25em;
+      left: 0;
+      top: 0;
+      transform-origin: bottom center;
+    }
+    
+    .generate-chars(72);
+    
+    .generate-chars(@n, @i: 1) when (@i =< @n) {
+      .char@{i} {
+        transform: rotate(@i * 5deg); 
+      }
+      .generate-chars(@n, (@i + 1));
+    }
+  }
+  
+  > .magic-circle {
+    width: 48%;
+    height: 48%;
+    position: absolute;
+    left: 26%;
+    top: 26%;
+    font-size: 0.6em;
+    
+    &.top {
+      top: -23%;
+    }
+    &.bottom {
+      top: 77%;
+    }
+    &.left {
+      left: -23%;
+    }
+    &.right {
+      left: 77%;
+    }
+    &.top-left {
+      top: -11%;
+      left: -11%; 
+    }
+    &.top-right {
+      top: -11%;
+      left: 62%; 
+    }
+    &.bottom-left {
+      top: 62%; 
+      left: -11%; 
+    }
+    &.bottom-right {
+      top: 62%;
+      left: 62%;
+    }
+  }
+  
+  /*
+   * Symbols
+   */
+  
+  .symbol {
+    position: absolute;
+    font-family: Quivira;
+    font-size: 3em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: @lightcolor;
+
+    
+    &.lighter {
+      color: @lightercolor;
+    }
+    
+    &.lightest {
+      color: @lightestcolor;
+    }
+  }
+  
+  /*
+   * Squares
+   */
+  .square {
+    position: absolute;
+    border: 1px solid @lightcolor;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    &.lighter {
+      border: 1px solid @lightercolor;
+    }
+
+    &.lightest {
+      border: 1px solid @lightestcolor;
+    }
+    
+    &.dotted {
+      border-style: dotted;
+    }
+    
+    > .formula {
+      font-family: Quivira;
+      font-size: 0.8em; 
+      text-align: center;
+      text-transform: uppercase;
+      color: @lightcolor;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      
+      &.up {
+        top: 0%;
+        transform: translate(-50%, 0%);
+      }
+      
+      &.down {
+        top: 100%;
+        margin-top: -1em;
+        transform: translate(-50%, 0%) rotate(180deg);
+      }
+      
+      &.right {
+        left: 100%;
+        transform: translate(-70%, -50%) rotate(90deg);
+      }
+      
+      &.left {
+        left: 0%;
+        transform: translate(-35%, -50%) rotate(-90deg);
+      }
+    }
+    
+    > .magic-circle {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    > .triangle {
+      width: 100%;
+      left: 0;
+      top: 100%;
+      
+      &:before {
+        width: 112%;
+        transform: rotate(-63.3deg);
+        
+      }
+      
+      &:after {
+        width: 112%;
+        transform: rotate(63.3deg);
+        left: -11.5%;
+      }
+      
+      &.reverse {
+        width: 100%;
+        left: 0;
+        top: -0.6%; 
+
+        &:before {
+          width: 112%;
+          transform: rotate(-63.3deg);
+        }
+
+        &:after {
+          width: 112%;
+          transform: rotate(63.3deg);
+          left: -11.5%;
+        }
+      }
+      
+      > .square {
+        width: @circleradius * 0.353;
+        height: @circleradius * 0.353; 
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        border: 1px solid @lightcolor;
+        
+        > .triangle {
+          width: 100%;
+          left: 0;
+          top: 100%;
+
+          &:before {
+            width: 112%;
+            transform: rotate(-63.3deg);
+
+          }
+
+          &:after {
+            width: 112%;
+            transform: rotate(63.3deg);
+            left: -11.5%;
+          }
+
+          &.reverse {
+            width: 100%;
+            left: 0;
+            top: 0%;
+
+            &:before {
+              width: 112%;
+              transform: rotate(-63.3deg);
+            }
+
+            &:after {
+              width: 112%;
+              transform: rotate(63.3deg);
+              left: -11.5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /*
+   * Triangles
+   */
+  .triangle {
+    position: absolute;
+    width: 88%;
+    height: 0;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: @lightcolor;
+    top: 75.5%;
+    left: 6%;
+    
+    &.reverse {
+      transform: rotate(180deg);
+      top: 24.5%;
+    }
+    
+    &:before {
+      
+      content: ''; 
+      position: absolute;
+      width: 100%;
+      height: 0;
+      border-width: 1px 0 0 0;
+      border-style: solid;
+      border-color: @lightcolor;
+      transform-origin: 0% 50%;
+      transform: rotate(-60deg);
+      
+    }
+    
+    &:after {
+      
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 0;
+      border-width: 1px 0 0 0;
+      border-style: solid;
+      border-color: @lightcolor;
+      transform-origin: 100% 50%;
+      transform: rotate(60deg);
+      
+    }
+    
+    &.lighter {
+      
+      background: @lightercolor;
+      
+      &:before, &:after {
+        
+        background: @lightercolor;
+        
+      }
+      
+    }
+    
+    &.lightest {
+      background: @lightestcolor;
+      
+      &:before, &:after {
+        background: @lightestcolor;
+      }
+    }
+    
+    &.dotted {
+      border-style: dotted;
+      
+      &:before, &:after {
+        border-style: dotted; 
+      }
+    }
+    
+    > .formula {
+      font-family: Quivira;
+      font-size: 0.8em; 
+      text-align: center;
+      text-transform: uppercase;
+      color: @lightcolor;
+      position: absolute;
+      top: -@circleradius * 0.27;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      
+      &.base {
+        top: 0%;
+        margin-top: -1.5em;
+        transform: translate(-50%, 0%);
+      }
+      
+      &.right {
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        transform-origin: 100% 50%;
+        transform: rotate(60deg) translate(0, .5em);
+      }
+      
+      &.left {
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        transform-origin: 0% 50%;
+        transform: rotate(-60deg) translate(0, .5em);
+      }
+    }
+    
+    > .symbol {
+      transform: translate(-50%, -450%); 
+    }
+    
+    > .square {
+      width: @circleradius * 0.4;
+      height: @circleradius * 0.4; 
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      border: 1px solid @lightcolor;
+    }
+    
+    > .magic-circle {
+      width: @circleradius * 0.5; 
+      height: @circleradius * 0.5;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      
+      > .triangle > .magic-circle {
+        width: @circleradius * 0.25; 
+        height: @circleradius * 0.25;
+      }
+      
+      > .triangle > .magic-circle > .triangle > .magic-circle {
+        width: @circleradius * 0.125; 
+        height: @circleradius * 0.125;
+      }
+    }
+    
+    > .triangle {
+      width: @circleradius * 0.44;
+      left: 50%;
+      top: -@circleradius * 0.125;
+      transform: translate(-50%, -50%);
+      
+      &.reverse {
+        transform: translate(-50%, -50%) rotate(180deg);
+        top: -@circleradius * 0.38;
+      }
+      
+      > .triangle {
+        width: @circleradius * 0.21;
+        left: 50%;
+        top: -@circleradius * 0.07;
+        transform: translate(-50%, -50%);
+
+        &.reverse {
+          transform: translate(-50%, -50%) rotate(180deg);
+          top: -@circleradius * 0.19;
+        }
+      }
+    }
+  }
+}
