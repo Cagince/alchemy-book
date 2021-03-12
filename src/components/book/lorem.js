@@ -1,5 +1,6 @@
 var Lorem;
-(function() {
+
+
 
     //Create a class named Lorem and constructor
     Lorem = function() {
@@ -115,16 +116,15 @@ var Lorem;
         if (element == null) return lorem;
     };
 
-    window.addEventListener('DOMContentLoaded',function(){
-        var els = document.querySelectorAll('[data-lorem]');
-        for(var i in els){
-            if(els.hasOwnProperty(i)){
-                var lorem = new Lorem;
-                lorem.type = els[i].tagName=='IMG' ? Lorem.IMAGE : Lorem.TEXT;
-                lorem.query = els[i].getAttribute('data-lorem');
-                lorem.createLorem(els[i]);
-            }
+export const fillTheBlanks = () => {
+    var els = document.querySelectorAll('[data-lorem]');
+    for(var i in els){
+        if(els.hasOwnProperty(i)){
+            var lorem = new Lorem;
+            lorem.type = els[i].tagName=='IMG' ? Lorem.IMAGE : Lorem.TEXT;
+            lorem.query = els[i].getAttribute('data-lorem');
+            lorem.createLorem(els[i]);
         }
-    });
+    }
+}
 
-})();
